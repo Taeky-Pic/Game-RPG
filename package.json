@@ -1,0 +1,11 @@
+{
+  "name": "hbc-office-adventure",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "HBC 사내 쿼터뷰 멀티플레이 액션 RPG 데모",
+  "scripts": {
+    "start": "node server/server.js"
+  },
+  "engines": { "node": ">=18" }
+}

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>HBC 오피스 어드벤처</title>
+<link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- 로그인 / 직업 선택 -->
+<div id="login" class="screen">
+  <div class="login-box">
+    <h1 class="logo"><span>HBC</span> 오피스 어드벤처</h1>
+    <p class="subtitle">부서를 고르고 동료들과 함께 사내 몬스터를 소탕하세요!</p>
+    <div id="cards" class="cards"></div>
+    <div id="classInfo" class="class-info"></div>
+    <div class="join-row">
+      <input id="nameInput" maxlength="10" placeholder="이름 (최대 10자)" autocomplete="off">
+      <button id="joinBtn" class="btn-primary">출근하기!</button>
+    </div>
+    <div id="loginErr" class="err"></div>
+  </div>
+</div>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div id="status" class="panel">
+    <div class="tab" id="stClass">공무팀</div>
+    <div class="status-body">
+      <div id="stFace" class="face"></div>
+      <div class="status-right">
+        <div class="st-name"><span id="stLv">Lv1</span> <b id="stName">이름</b></div>
+        <div class="gauge hp"><i id="hpBar"></i><span id="hpTxt"></span></div>
+        <div class="gauge mp"><i id="mpBar"></i><span id="mpTxt"></span></div>
+        <div class="gauge exp"><i id="expBar"></i><span id="expTxt"></span></div>
+      </div>
+    </div>
+    <div class="online" id="online">접속 중 1명</div>
+  </div>
+
+  <div id="mapPanel" class="panel">
+    <div class="tab" id="zoneName">HBC 본사 앞</div>
+    <canvas id="minimap" width="200" height="104"></canvas>
+  </div>
+
+  <div id="quest" class="panel">
+    <div class="tab tab-gold">퀘스트</div>
+    <div class="quest-title">사내 버그 소탕 작전</div>
+    <ul id="questList"></ul>
+  </div>
+
+  <div id="hotbar">
+    <div class="slot skill" id="slotSkill"><span class="key">1</span><span class="icon" id="skillIcon"></span><span class="cd"></span><span class="cdtxt"></span><span class="sname" id="skillName"></span></div>
+    <div class="slot" id="slotCoffee"><span class="key">F</span><span class="icon">☕</span><span class="cd"></span><span class="cdtxt"></span><span class="sname">믹스커피</span></div>
+    <div class="slot small" data-emote="0"><span class="key">5</span><span class="icon">❗</span></div>
+    <div class="slot small" data-emote="1"><span class="key">6</span><span class="icon">❤️</span></div>
+    <div class="slot small" data-emote="2"><span class="key">7</span><span class="icon">💢</span></div>
+    <div class="slot small" data-emote="3"><span class="key">8</span><span class="icon">💧</span></div>
+  </div>
+  <div id="hint">좌클릭: 이동·공격 &nbsp;|&nbsp; 우클릭 / 1: 스킬 &nbsp;|&nbsp; F: 커피 &nbsp;|&nbsp; Enter: 채팅 &nbsp;|&nbsp; H: 도움말</div>
+
+  <div id="chat">
+    <div id="chatLog"></div>
+    <input id="chatInput" maxlength="60" placeholder="Enter로 채팅..." autocomplete="off">
+  </div>
+
+  <div id="banner"></div>
+  <div id="toasts"></div>
+
+  <div id="dialog" class="hidden">
+    <div class="dlg-portrait"><img src="/assets/portrait_gongmu.png" alt=""></div>
+    <div class="dlg-box">
+      <div class="tab" id="dlgName">공무팀 박선임</div>
+      <div class="dlg-text" id="dlgText"></div>
+      <div class="dlg-next">▼</div>
+    </div>
+  </div>
+
+  <div id="dead" class="hidden"><div class="dead-box"><b>쓰러졌습니다...</b><span id="deadTxt"></span></div></div>
+
+  <div id="help" class="panel hidden">
+    <div class="tab">조작법</div>
+    <ul>
+      <li><b>좌클릭</b> 땅: 이동 (누르고 있으면 계속 따라감)</li>
+      <li><b>좌클릭</b> 몬스터: 자동으로 다가가서 공격</li>
+      <li><b>우클릭</b> 또는 <b>1</b>: 부서 스킬 (마우스 방향/위치)</li>
+      <li><b>F</b>: 믹스커피 (HP/MP 회복)</li>
+      <li><b>5~8</b>: 감정 표현 &nbsp; <b>Enter</b>: 채팅</li>
+      <li>NPC <b>박선임</b>을 클릭하면 대화할 수 있어요</li>
+      <li>마을(본사 앞)은 안전지대, 체력·마나 회복이 3배!</li>
+    </ul>
+    <div class="help-close">H 또는 클릭으로 닫기</div>
+  </div>
+
+  <div id="disconnected" class="hidden"><div class="dead-box"><b>서버 연결이 끊어졌습니다</b><span>서버가 켜져 있는지 확인 후 새로고침(F5) 해주세요.</span></div></div>
+</div>
+
+<script type="module" src="/js/main.js"></script>
+</body>
+</html>
